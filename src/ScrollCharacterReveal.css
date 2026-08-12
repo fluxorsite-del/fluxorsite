@@ -1,0 +1,13 @@
+.scroll-character-reveal { white-space: pre-wrap; }
+
+.scroll-character-reveal__char {
+  --char-reveal: 0;
+  display: inline;
+  color: rgba(242, 240, 235, calc(.16 + var(--char-reveal) * .84));
+  text-shadow: 0 0 calc(var(--char-reveal) * 18px) rgba(255,255,255,calc(var(--char-reveal) * .08));
+  transition: color .08s linear, text-shadow .08s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-character-reveal__char { --char-reveal: 1 !important; }
+}

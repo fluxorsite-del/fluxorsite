@@ -1,0 +1,55 @@
+import React, { useEffect, useRef } from "react";
+
+export default function ServiceHoverLink({ index, title, description, image }) {
+  const linkRef = useRef(null);
+  const imageRef = useRef(null);
+  const stateRef = useRef({ x: 0, y: 0, tx: 0, ty: 0, raf: 0, active: false });
+
+  useEffect(() => () => {
+    if (stateRef.current.raf) cancelAnimationFrame(stateRef.current.raf);
+  }, []);
+
+  const animate = () => {
+    const state = stateRef.current;
+    const imageElement = imageRef.current;
+    if (!imageElement) return;
+    state.x += (state.tx - state.x) * .14;
+    state.y += (state.ty - state.y) * .14;
+    imageElement.style.setProperty("--hover-x", `${state.x}px`);
+    imageElement.style.setProperty("--hover-y", `${state.y}px`);
+    if (state.active || Math.abs(state.tx - state.x) > .1 || Math.abs(state.ty - state.y) > .1) state.raf = requestAnimationFrame(animate);
+    else state.raf = 0;
+  };
+
+  const onPointerMove = event => {
+    if (event.pointerType === "touch") return;
+    const rect = linkRef.current.getBoundingClientRect();
+    const state = stateRef.current;
+    state.tx = (event.clientX - rect.left - rect.width * .67) * .18;
+    state.ty = (event.clientY - rect.top - rect.height * .5) * .25;
+    if (!state.raf) state.raf = requestAnimationFrame(animate);
+  };
+
+  const onPointerEnter = () => {
+    stateRef.current.active = true;
+    if (!stateRef.current.raf) stateRef.current.raf = requestAnimationFrame(animate);
+  };
+
+  const onPointerLeave = () => {
+    const state = stateRef.current;
+    state.active = false;
+    state.tx = 0;
+    state.ty = 0;
+    if (!state.raf) state.raf = requestAnimationFrame(animate);
+  };
+
+  return <a ref={linkRef} className="service-link" href="#contact" onPointerMove={onPointerMove} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
+    <span className="service-no">{String(index + 1).padStart(2, "0")}</span>
+    <span className="service-link-copy">
+      <span className="service-heading" aria-label={title}>{[...title].map((character, characterIndex) => <span className="service-heading-char" aria-hidden="true" key={`${character}-${characterIndex}`} style={{ "--char-index": characterIndex }}>{character === " " ? "\u00a0" : character}</span>)}</span>
+      <span className="service-description">{description}</span>
+    </span>
+    <img ref={imageRef} className="service-hover-image" src={image} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <span className="service-arrow" aria-hidden="true">→</span>
+  </a>;
+}
