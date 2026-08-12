@@ -14,8 +14,8 @@ import ServiceHoverLink from "./ServiceHoverLink";
 import { FooterDoodles, SocialIcon } from "./FooterDoodles";
 import CircularGallery from "./CircularGallery";
 import ScrollSyncedText from "./ScrollSyncedText";
-import SitePreloader from "./SitePreloader";
 import MenuDoodles from "./MenuDoodles";
+import heroVideoUrl from "../fluxor-bg.mp4";
 import serviceWebDesign from "./assets/services/web-design.webp";
 import serviceCreative from "./assets/services/desenvolvimento-criativo.webp";
 import serviceLanding from "./assets/services/landing-pages.webp";
@@ -351,7 +351,7 @@ function VideoPaintReveal() {
   return (
     <div ref={wrapRef} className="paint-stage" data-testid="paint-stage">
       <video ref={videoRef} className="paint-source" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
-        <source src="/fluxor-bg.mp4" type="video/mp4" />
+        <source src={heroVideoUrl} type="video/mp4" />
       </video>
       <canvas ref={canvasRef} className="video-reveal" aria-hidden="true" />
     </div>
@@ -604,7 +604,7 @@ function Studio() {
       <div className="intro-progress" aria-hidden="true"><span /></div>
       <div className="intro-project" aria-label="Projeto Fluxor em movimento">
         <video muted loop playsInline preload="metadata" aria-hidden="true">
-          <source src="/fluxor-bg.mp4" type="video/mp4" />
+          <source src={heroVideoUrl} type="video/mp4" />
         </video>
         <div className="intro-project-wash" aria-hidden="true" />
         <span className="intro-project-index">PROJETO / 01</span>
@@ -709,5 +709,5 @@ function Contact() {
 
 export default function App() {
   useReveal();
-  return <><SitePreloader/><a className="skip-link" href="#studio">Pular para o conteúdo</a><div className="hero-transition-shell"><Hero/></div><main><Studio/><DigitalEvolution/><Services/><Process/><Testimonials/><ScrollSyncedText/><Contact/></main></>;
+  return <><a className="skip-link" href="#studio">Pular para o conteúdo</a><div className="hero-transition-shell"><Hero/></div><main><Studio/><DigitalEvolution/><Services/><Process/><Testimonials/><ScrollSyncedText/><Contact/></main></>;
 }
