@@ -14,6 +14,8 @@ import ServiceHoverLink from "./ServiceHoverLink";
 import { FooterDoodles, SocialIcon } from "./FooterDoodles";
 import CircularGallery from "./CircularGallery";
 import ScrollSyncedText from "./ScrollSyncedText";
+import SitePreloader from "./SitePreloader";
+import MenuDoodles from "./MenuDoodles";
 import serviceWebDesign from "./assets/services/web-design.webp";
 import serviceCreative from "./assets/services/desenvolvimento-criativo.webp";
 import serviceLanding from "./assets/services/landing-pages.webp";
@@ -358,6 +360,7 @@ function VideoPaintReveal() {
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeMenuLink, setActiveMenuLink] = useState("");
 
   useEffect(() => {
     const onKeyDown = event => {
@@ -397,11 +400,13 @@ function Nav() {
       <span/><span/><span className="menu-toggle-label">MENU</span>
     </button>
     <div className="menu-panel" id="fullscreen-menu" aria-hidden={!menuOpen}>
+      <div className="menu-panel-meta"><span>NAVEGAÇÃO / 2026</span><span>ESTÚDIO DIGITAL INDEPENDENTE</span></div>
+      <MenuDoodles active={activeMenuLink} />
       <div className="menu-links">
-        <a href="#work" onClick={closeMenu}><small>01</small><span>Projetos</span><i>↗</i></a>
-        <a href="#studio" onClick={closeMenu}><small>02</small><span>Estúdio</span><i>↗</i></a>
-        <a href="#services" onClick={closeMenu}><small>03</small><span>Serviços</span><i>↗</i></a>
-        <a href="#contact" onClick={closeMenu}><small>04</small><span>Contato</span><i>↗</i></a>
+        <a href="#work" onMouseEnter={() => setActiveMenuLink("work")} onMouseLeave={() => setActiveMenuLink("")} onFocus={() => setActiveMenuLink("work")} onClick={closeMenu}><small>01 / SELEÇÃO</small><span>Projetos</span><i>↗</i></a>
+        <a href="#studio" onMouseEnter={() => setActiveMenuLink("studio")} onMouseLeave={() => setActiveMenuLink("")} onFocus={() => setActiveMenuLink("studio")} onClick={closeMenu}><small>02 / SOBRE</small><span>Estúdio</span><i>↗</i></a>
+        <a href="#services" onMouseEnter={() => setActiveMenuLink("services")} onMouseLeave={() => setActiveMenuLink("")} onFocus={() => setActiveMenuLink("services")} onClick={closeMenu}><small>03 / CAPACIDADES</small><span>Serviços</span><i>↗</i></a>
+        <a href="#contact" onMouseEnter={() => setActiveMenuLink("contact")} onMouseLeave={() => setActiveMenuLink("")} onFocus={() => setActiveMenuLink("contact")} onClick={closeMenu}><small>04 / CONVERSA</small><span>Contato</span><i>↗</i></a>
       </div>
       <div className="menu-footer">
         <span>FLUXOR® — SALVADOR, BR</span>
@@ -704,5 +709,5 @@ function Contact() {
 
 export default function App() {
   useReveal();
-  return <><a className="skip-link" href="#studio">Pular para o conteúdo</a><div className="hero-transition-shell"><Hero/></div><main><Studio/><DigitalEvolution/><Services/><Process/><Testimonials/><ScrollSyncedText/><Contact/></main></>;
+  return <><SitePreloader/><a className="skip-link" href="#studio">Pular para o conteúdo</a><div className="hero-transition-shell"><Hero/></div><main><Studio/><DigitalEvolution/><Services/><Process/><Testimonials/><ScrollSyncedText/><Contact/></main></>;
 }
