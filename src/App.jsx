@@ -313,6 +313,16 @@ function VideoPaintReveal() {
     const onScroll = () => {
       bounds = wrap.getBoundingClientRect();
     };
+    const resumeRendering = () => {
+      resize();
+      lastTime = performance.now();
+      video.muted = true;
+      video.play().catch(() => {});
+      if (heroVisible && !raf) raf = requestAnimationFrame(tick);
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") resumeRendering();
+    };
 
     const observer = new ResizeObserver(resize);
     observer.observe(wrap);
@@ -336,7 +346,14 @@ function VideoPaintReveal() {
     hero.addEventListener("pointerenter", onEnter);
     hero.addEventListener("pointerleave", onLeave);
     window.addEventListener("scroll", onScroll, { passive: true });
-    raf = requestAnimationFrame(tick);
+    window.addEventListener("focus", resumeRendering);
+    window.addEventListener("pageshow", resumeRendering);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    video.addEventListener("loadeddata", resumeRendering);
+    video.addEventListener("canplay", resumeRendering);
+    video.addEventListener("playing", resumeRendering);
+    if (video.readyState === HTMLMediaElement.HAVE_NOTHING) video.load();
+    resumeRendering();
     return () => {
       cancelAnimationFrame(raf);
       observer.disconnect();
@@ -345,12 +362,18 @@ function VideoPaintReveal() {
       hero.removeEventListener("pointerenter", onEnter);
       hero.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("focus", resumeRendering);
+      window.removeEventListener("pageshow", resumeRendering);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      video.removeEventListener("loadeddata", resumeRendering);
+      video.removeEventListener("canplay", resumeRendering);
+      video.removeEventListener("playing", resumeRendering);
     };
   }, []);
 
   return (
     <div ref={wrapRef} className="paint-stage" data-testid="paint-stage">
-      <video ref={videoRef} className="paint-source" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+      <video ref={videoRef} className="paint-source" autoPlay muted loop playsInline preload="auto" aria-hidden="true">
         <source src={heroVideoUrl} type="video/mp4" />
       </video>
       <canvas ref={canvasRef} className="video-reveal" aria-hidden="true" />
@@ -431,8 +454,10 @@ function Hero() {
       const range = Math.max(1, shell.offsetHeight - window.innerHeight);
       const progress = Math.max(0, Math.min(1, -shell.getBoundingClientRect().top / range));
       const eased = 1 - Math.pow(1 - progress, 3);
+      const isUltrawide = window.innerWidth / window.innerHeight >= 2;
+      const horizontalTravel = isUltrawide ? window.innerHeight * .28 : window.innerWidth * .25;
       hero.style.setProperty("--hero-scale", (1 - eased * .41).toFixed(4));
-      hero.style.setProperty("--hero-x", `${eased * 25}vw`);
+      hero.style.setProperty("--hero-x", `${eased * horizontalTravel}px`);
       hero.style.setProperty("--hero-y", `${eased * -5}vh`);
       hero.style.setProperty("--hero-rotate", `${eased * 2.4}deg`);
       hero.style.setProperty("--hero-radius", `${eased * 34}px`);
