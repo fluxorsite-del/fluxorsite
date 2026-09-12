@@ -7,6 +7,19 @@ try {
   const page=await browser.newPage({viewport:{width:2560,height:1080}});
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForTimeout(1200);
+  const firstFold=await page.evaluate(()=>({
+    heroHeight:document.querySelector('.hero').getBoundingClientRect().height,
+    wordWidth:document.querySelector('.hero-word').getBoundingClientRect().width,
+    studioTop:document.querySelector('#studio').getBoundingClientRect().top,
+    viewportWidth:innerWidth,viewportHeight:innerHeight
+  }));
+  assert.equal(firstFold.heroHeight,firstFold.viewportHeight);
+  assert.ok(firstFold.wordWidth>firstFold.viewportWidth*.9,'Wordmark should dominate the first fold');
+  assert.ok(firstFold.studioTop>=firstFold.viewportHeight,'Next section entered the first fold');
+  await page.evaluate(()=>scrollTo(0,700));
+  await page.reload({waitUntil:'networkidle'});
+  await page.waitForTimeout(100);
+  assert.equal(await page.evaluate(()=>scrollY),0,'Direct preview should reopen at the top of the hero');
   const intro=page.locator('.hero-intro > p');
   const firstButton=page.locator('.hero-actions a').first();
   const beforeButton=await firstButton.evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}));

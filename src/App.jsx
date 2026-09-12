@@ -1,6 +1,6 @@
 import VideoPaintReveal from "./VideoPaintReveal";
 import ProjectDialog from "./ProjectDialog";
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import projectVeil from "./assets/project-veil-optimized.webp";
 import projectMateria from "./assets/project-materia-optimized.webp";
 import projectSignal from "./assets/project-signal-optimized.webp";
@@ -455,6 +455,17 @@ function Contact() {
 }
 
 export default function App() {
+  useLayoutEffect(() => {
+    if (window.location.hash) return undefined;
+    const previous = history.scrollRestoration;
+    history.scrollRestoration = "manual";
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    const frame = requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "instant" }));
+    return () => {
+      cancelAnimationFrame(frame);
+      history.scrollRestoration = previous;
+    };
+  }, []);
   useReveal();
   return <><a className="skip-link" href="#studio">Pular para o conteúdo</a><div className="hero-transition-shell"><Nav/><Hero/></div><main><Studio/><CaseStudies/><DigitalEvolution/><Services/><Process/><Testimonials/><ScrollSyncedText/><Contact/></main><a className="whatsapp-float" href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="Falar com a Fluxor pelo WhatsApp"><span>WhatsApp</span><i aria-hidden="true">↗</i></a></>;
 }
