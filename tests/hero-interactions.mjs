@@ -58,6 +58,32 @@ try {
   assert.ok(await page.locator('.paint-stage').evaluate(el=>el.classList.contains('is-active')));
   await page.close();
 
+  // Some ultrawide Windows setups expose `prefers-reduced-motion: reduce` even
+  // when the user expects the full desktop experience. Large/wide viewports
+  // must keep the hero mask, horizontal chapters and scroll-driven meteor.
+  const ultrawideReduced=await browser.newPage({
+    viewport:{width:2560,height:1080},
+    reducedMotion:'reduce'
+  });
+  await ultrawideReduced.goto(url,{waitUntil:'networkidle'});
+  await ultrawideReduced.waitForTimeout(1200);
+  assert.equal(await ultrawideReduced.locator('.video-reveal').getAttribute('data-renderer'),'webgl');
+  assert.equal(await ultrawideReduced.locator('.company-track').evaluate(el=>getComputedStyle(el).display),'flex');
+  const company=ultrawideReduced.locator('.company-intro');
+  await company.evaluate(el=>scrollTo(0,scrollY+el.getBoundingClientRect().top+(el.offsetHeight-innerHeight)*.58));
+  await ultrawideReduced.waitForTimeout(250);
+  assert.notEqual(await company.evaluate(el=>getComputedStyle(el).getPropertyValue('--chapter-x').trim()),'0vw');
+  const meteor=ultrawideReduced.locator('.meteor-scroll');
+  await meteor.evaluate(el=>scrollTo(0,scrollY+el.getBoundingClientRect().top+(el.offsetHeight-innerHeight)*.24));
+  await ultrawideReduced.waitForTimeout(500);
+  const meteorFrameStart=Number(await meteor.getAttribute('data-frame'));
+  await meteor.evaluate(el=>scrollTo(0,scrollY+el.getBoundingClientRect().top+(el.offsetHeight-innerHeight)*.72));
+  await ultrawideReduced.waitForTimeout(500);
+  const meteorFrameEnd=Number(await meteor.getAttribute('data-frame'));
+  assert.ok(Number.isFinite(meteorFrameStart)&&Number.isFinite(meteorFrameEnd)&&meteorFrameEnd>meteorFrameStart,
+    `Ultrawide meteor remained static: ${meteorFrameStart} -> ${meteorFrameEnd}`);
+  await ultrawideReduced.close();
+
   const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   await mobile.addInitScript(()=>{
     window.__blockHeroPlay=true;
@@ -73,5 +99,5 @@ try {
   await mobile.locator('.services').scrollIntoViewIfNeeded();
   await mobile.waitForFunction(()=>document.querySelector('.paint-source').paused);
   await mobile.close();
-  console.log('Hero: fullscreen edge reveal, first-load interaction, idle pause, context-loss fallback, autoplay recovery and offscreen pause passed.');
+  console.log('Hero: fullscreen reveal, ultrawide reduced-motion override, horizontal chapters, meteor animation, context fallback and mobile autoplay passed.');
 } finally { await browser.close(); }

@@ -61,7 +61,7 @@ export default function MorphSlider({ items, autoplay = true, autoplayDelay = 3,
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [fallbackMode, setFallbackMode] = useState(false);
-  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)');
 
   useEffect(() => {
     const stage = stageRef.current;

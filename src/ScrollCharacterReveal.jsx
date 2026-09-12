@@ -13,7 +13,7 @@ export default function ScrollCharacterReveal({ children, className = "", progre
     if (!root) return undefined;
     const scrollSection = root.closest("[data-scroll-reveal-section]");
     const spans = [...root.querySelectorAll(".scroll-character-reveal__char")];
-    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) {
+    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)').matches) {
       spans.forEach(span => span.style.setProperty('--char-reveal', '1'));
       return;
     }

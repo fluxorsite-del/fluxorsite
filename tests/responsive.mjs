@@ -81,11 +81,17 @@ try {
       await page.waitForFunction(()=>document.querySelector('.paint-source').currentTime<1);
     });
     else await check(`${name} hover contrast`,async()=>{
-      for(const selector of ['.brand','.hero-intro > p','.hero-actions a:first-child','.hero-meta p:first-child']){
+      for(const selector of ['.brand','.hero-intro > p','.hero-meta p:first-child']){
         await page.locator(selector).hover();
         await page.waitForTimeout(250);
         assert.equal(await page.locator(selector).evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
       }
+      const maskButton=page.locator('.hero-actions a:first-child');
+      await maskButton.hover();
+      await page.waitForTimeout(250);
+      assert.deepEqual(await maskButton.evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor})),{
+        color:'rgb(17, 17, 15)',background:'rgb(255, 255, 255)'
+      });
       await page.mouse.move(width-5,height-5);
       await page.waitForTimeout(2000);
     });

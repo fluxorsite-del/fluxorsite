@@ -1,3 +1,3 @@
 .elastic-mesh { position: relative; width: 100%; height: 100%; min-height: 0; touch-action: none; }
 .elastic-mesh canvas { display: block; width: 100%; height: 100%; }
-@media (pointer: coarse), (prefers-reduced-motion: reduce) { .elastic-mesh { display: none; } }
+@media (pointer: coarse), (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100) { .elastic-mesh { display: none; } }

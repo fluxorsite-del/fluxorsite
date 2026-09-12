@@ -10,7 +10,7 @@ export default function CircularGallery({ items = [], bend = 3, scrollSpeed = 1,
   const currentRef = useRef(0);
   const dragRef = useRef(null);
   const [position, setPosition] = useState(0);
-  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)');
   const frameRef = useRef(0);
   const animateRef = useRef(null);
 

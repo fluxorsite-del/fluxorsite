@@ -7,7 +7,7 @@ import poster from "./assets/hero-mobile-poster.webp";
 
 export default function VideoPaintReveal() {
   const mobile = useMediaQuery("(max-width: 900px)");
-  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const reduced = useMediaQuery("(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)");
   const wrapRef = useRef(null), videoRef = useRef(null), canvasRef = useRef(null);
   const [fallback, setFallback] = useState(false);
   const [blocked, setBlocked] = useState(false);

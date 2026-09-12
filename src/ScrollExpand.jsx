@@ -32,7 +32,7 @@ export default function ScrollExpand({
   style,
 }) {
   const rootRef = useRef(null);
-  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)');
   const trackRef = useRef(null);
   const stageRef = useRef(null);
   const frameRef = useRef(null);
@@ -87,7 +87,7 @@ export default function ScrollExpand({
     const track = trackRef.current;
     const stage = stageRef.current;
     if (!root || !track || !stage) return undefined;
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)").matches;
     let raf = 0;
     let current = 0;
     let target = 0;

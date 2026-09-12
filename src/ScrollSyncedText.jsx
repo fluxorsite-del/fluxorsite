@@ -9,7 +9,7 @@ const chapters = [
 
 export default function ScrollSyncedText() {
   const sectionRef = useRef(null);
-  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)');
   useEffect(() => {
     if (reduced) return;
     const section = sectionRef.current;

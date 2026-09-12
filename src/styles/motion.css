@@ -19,7 +19,7 @@
   .scroll-synced-chapter p { margin: 0; max-width: 440px; align-self: auto; font-size: 13px; }
   .scroll-synced-side { display: none; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100) {
   .scroll-synced { height: auto; }
   .scroll-synced-sticky { position: relative; height: auto; padding: 40px max(18px,4vw); }
   .scroll-synced-chapters { position: relative; inset: auto; display: grid; gap: 60px; padding: 60px 0 30px; }

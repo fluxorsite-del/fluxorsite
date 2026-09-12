@@ -68,7 +68,7 @@
   .hero-intro { left: var(--page-gutter,3vw); }
   .hero-meta, .hero-rule { left: var(--page-gutter,3vw); right: var(--page-gutter,3vw); }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100) {
   .hero-transition-shell { height: auto; }
   .hero { position: relative; transform: none; opacity: 1; }
   .hero-word > span { animation: none; transform: none; }

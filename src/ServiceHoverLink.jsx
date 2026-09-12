@@ -22,7 +22,7 @@ export default function ServiceHoverLink({ index, title, description, image }) {
   };
 
   const onPointerMove = event => {
-    if (event.pointerType === "touch" || matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) return;
+    if (event.pointerType === "touch" || matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)').matches) return;
     const rect = linkRef.current.getBoundingClientRect();
     const state = stateRef.current;
     state.tx = (event.clientX - rect.left - rect.width * .67) * .18;
@@ -31,7 +31,7 @@ export default function ServiceHoverLink({ index, title, description, image }) {
   };
 
   const onPointerEnter = () => {
-    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) return;
+    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)').matches) return;
     stateRef.current.active = true;
     if (!stateRef.current.raf) stateRef.current.raf = requestAnimationFrame(animate);
   };

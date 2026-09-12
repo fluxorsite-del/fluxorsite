@@ -10,7 +10,7 @@ const clamp = n => Math.max(0, Math.min(1,n));
 export default function MeteorScrollSection() {
   const sectionRef = useRef(null), canvasRef = useRef(null), textRef = useRef(null);
   const mobile = useMediaQuery('(max-width: 900px)');
-  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)');
   const frames = mobile ? mobileFrames : desktopFrames;
 
   useEffect(() => {

@@ -45,7 +45,7 @@ export default function ElasticMesh({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches) return undefined;
+    if (!container || matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)").matches) return undefined;
     const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(devicePixelRatio || 1, 1.5) });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);

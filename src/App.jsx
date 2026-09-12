@@ -160,7 +160,7 @@ function Hero() {
   useEffect(() => {
     const hero = heroRef.current;
     const shell = hero.closest(".hero-transition-shell");
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)").matches;
     if (reduced) return undefined;
     let frame = 0;
     const update = () => {
@@ -218,7 +218,7 @@ function Studio() {
 
   useEffect(() => {
     const section = sectionRef.current;
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100)").matches;
     let frame = 0;
     const clamp = value => Math.max(0, Math.min(1, value));
     const ease = value => 1 - Math.pow(1 - value, 3);

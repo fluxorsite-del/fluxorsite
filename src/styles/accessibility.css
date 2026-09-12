@@ -13,7 +13,7 @@ a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible { outline: 3
 .menu-links a:focus-visible::before { transform: scaleX(1); }
 .contact-socials a, .circular-gallery-controls button { min-width: 44px; min-height: 44px; }
 .testimonial-avatar { display: grid; place-items: center; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; background: var(--acid); color: var(--ink); font-size: 18px; font-weight: 800; }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal, .reveal-late { opacity: 1 !important; transform: none !important; }

@@ -226,7 +226,7 @@
 @media (pointer: coarse) {
   .service-hover-image { display: none; }
   .service-link:hover .service-heading, .service-link:hover .service-heading-char, .service-link:hover .service-description { transform: none; } }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (max-width: 1920px) and (max-aspect-ratio: 199 / 100) {
   .footer-doodle, .footer-doodle *, .menu-doodle, .menu-doodle * { animation: none !important; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
