@@ -59,10 +59,13 @@ export default function createFluidRenderer(canvas, video) {
     `,
     display: `
       vec4 f=texture2D(field,uv);
-      float scale=max(viewport.x/videoSize.x,viewport.y/videoSize.y);
-      vec2 cover=(uv-.5)*viewport/(videoSize*scale)+.5;
+      float scale=min(viewport.x/videoSize.x,viewport.y/videoSize.y);
+      float compositionScale=viewport.x/viewport.y>=2. ? .94 : 1.016;
+      vec2 compositionCenter=vec2(.4875,.4955);
+      vec2 movieUv=(uv-compositionCenter)*viewport/(videoSize*scale*compositionScale)+.5;
+      float inside=step(0.,movieUv.x)*step(movieUv.x,1.)*step(0.,movieUv.y)*step(movieUv.y,1.);
       vec2 flow=(f.rg-.5)*.009;
-      vec3 rgb=texture2D(movie,clamp(cover+flow,0.,1.)).rgb;
+      vec3 rgb=texture2D(movie,clamp(movieUv+flow,0.,1.)).rgb*inside;
       gl_FragColor=vec4(rgb,smoothstep(.14,.20,f.b));
     `
   };

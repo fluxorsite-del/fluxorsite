@@ -42,12 +42,14 @@ try {
   });
   // No browser-focus change or click is performed before revealing each edge.
   for(const [x,y] of [[12,140],[2548,140],[12,950],[2548,950],[1280,540]]) {
-    await page.mouse.move(x,y);
-    const alpha=await page.locator('.video-reveal').evaluate((canvas,[x,y])=>new Promise(resolve=>requestAnimationFrame(()=>{
+    const alpha=await page.locator('.video-reveal').evaluate((canvas,[x,y])=>new Promise(resolve=>{
+      canvas.closest('.hero-transition-shell').dispatchEvent(new PointerEvent('pointermove',{clientX:x,clientY:y,bubbles:true}));
+      requestAnimationFrame(()=>{
       const gl=canvas.getContext('webgl'), rect=canvas.getBoundingClientRect(), pixel=new Uint8Array(4);
       gl.readPixels(Math.floor((x-rect.left)/rect.width*canvas.width),Math.floor((rect.bottom-y)/rect.height*canvas.height),1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);
       resolve(pixel[3]);
-    })),[x,y]);
+      });
+    }),[x,y]);
     assert.ok(alpha>180,`No fluid at ${x},${y}: alpha ${alpha}`);
   }
   await page.waitForTimeout(2000);

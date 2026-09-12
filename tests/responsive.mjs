@@ -127,6 +127,21 @@ try {
     });
     await scrollSection(page,'.services');
     await check(`${name} service words`,async()=>assert.deepEqual(await bounds(page,'.service-heading-word'),[]));
+    await scrollSection(page,'.pricing');
+    await check(`${name} pricing cards`,async()=>{
+      assert.equal(await page.locator('.pricing-card').count(),3);
+      assert.deepEqual(await bounds(page,'.pricing-card h3,.pricing-card > p,.pricing-card li,.pricing-card > a span'),[]);
+      for(const card of await page.locator('.pricing-card').all()){
+        const spacing=await card.evaluate(el=>{
+          const last=el.querySelector('li:last-child').getBoundingClientRect();
+          const cta=el.querySelector(':scope > a').getBoundingClientRect();
+          const box=el.getBoundingClientRect();
+          return {gap:cta.top-last.bottom,inside:cta.bottom<=box.bottom+1};
+        });
+        assert.ok(spacing.gap>=24,`Pricing CTA too close to feature list: ${spacing.gap}px`);
+        assert.ok(spacing.inside,'Pricing CTA leaves card bounds');
+      }
+    });
     await scrollSection(page,'.digital-evolution-outro');
     if(mobile) await check(`${name} mobile reading`,async()=>{
       assert.deepEqual(await bounds(page,'.digital-evolution-outro-copy p'),[]);
@@ -152,7 +167,11 @@ try {
     }
     await check(`${name} last chapter visual`,()=>snapshot(page,`${name}-chapter`));
     await scrollSection(page,'.contact');
-    await check(`${name} footer layout`,async()=>{assert.deepEqual(await bounds(page,'.contact h2,.contact-mail span'),[]);});
+    await check(`${name} footer layout`,async()=>{
+      assert.deepEqual(await bounds(page,'.contact h2,.contact-mail span'),[]);
+      assert.ok(await page.locator('.footer-doodle').count()>=5);
+      assert.ok(await page.locator('.footer-doodle-fine,.footer-doodle-orbit,.footer-doodle-node').count()>=10);
+    });
     await check(`${name} footer visual`,()=>snapshot(page,`${name}-footer`));
     await check(`${name} console`,async()=>assert.deepEqual(errors,[]));
     await context.close();

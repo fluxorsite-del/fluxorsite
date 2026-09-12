@@ -9,39 +9,65 @@ const strokeProps = {
   vectorEffect: "non-scaling-stroke",
 };
 
+const fineStrokeProps = {
+  ...strokeProps,
+  strokeWidth: 3,
+};
+
 export function FooterDoodles() {
   return <div className="footer-doodles" aria-hidden="true">
     <svg className="footer-doodle footer-dino" viewBox="0 0 300 250">
+      <path className="footer-doodle-echo" d="M19 196c35-8 55-30 59-61 5-38-4-78 19-102 20-21 58-17 79 5 20 21 22 54 42 75 13 14 31 23 59 26-22 19-48 25-73 19-10 34-31 58-64 67-43 12-92-2-121-29Z" />
+      <path className="footer-doodle-fill" d="M31 187c28-10 43-28 47-52 5-36-4-74 17-96 18-19 53-16 72 4 19 20 21 50 39 70 13 14 30 22 57 25-21 14-42 17-63 12-8 31-28 52-57 60-39 10-83-1-112-23Z" />
       <path {...strokeProps} d="M26 190c30-7 49-25 54-52 6-35-5-74 15-99 17-21 52-21 74-3 16 13 22 33 29 52 11 28 29 45 69 48-20 11-42 13-63 7-4 34-23 61-55 72-31 10-70 4-89-17" />
       <path {...strokeProps} d="m101 38 13-25 16 23 18-25 12 30m-61 52c13 5 26 5 38-2m-8-27 1 1m37 13 1 1m-88 70-34-8m37 32-29 23m121-53 35 22m-52 26 16 35" />
       <path {...strokeProps} className="footer-dino-arm" d="M176 115c19 4 32 14 42 31l-24 2" />
+      <path {...fineStrokeProps} className="footer-doodle-fine" d="M108 111c8 8 17 11 28 10m-42 18c19 12 40 15 62 8m-46 29c14 6 27 6 39 2" />
+      <circle className="footer-doodle-node" cx="216" cy="64" r="7" />
+      <circle className="footer-doodle-node" cx="239" cy="82" r="3" />
     </svg>
 
     <svg className="footer-doodle footer-smiley" viewBox="0 0 210 210">
+      <circle className="footer-doodle-fill" cx="105" cy="105" r="82" />
+      <circle {...fineStrokeProps} className="footer-doodle-orbit" cx="105" cy="105" r="101" />
       <path {...strokeProps} d="M105 12c53 0 92 39 92 92s-39 94-92 94-93-41-93-94 40-92 93-92Z" />
       <path {...strokeProps} className="footer-eye footer-eye-left" d="m60 72 16 15m0-15L60 87" />
       <path {...strokeProps} className="footer-eye footer-eye-right" d="m134 72 16 15m0-15-16 15" />
       <path {...strokeProps} d="M55 124c23 33 73 37 101 0-10 7-22 8-31 2-11 11-26 10-36-1-10 7-23 7-34-1Z" />
+      <path {...fineStrokeProps} className="footer-doodle-fine" d="M32 46 15 29m164 17 16-18M32 166l-18 16m166-17 16 15" />
+      <circle className="footer-doodle-node" cx="105" cy="15" r="4" />
     </svg>
 
     <svg className="footer-doodle footer-robot" viewBox="0 0 260 260">
+      <rect className="footer-doodle-echo" x="38" y="42" width="184" height="190" rx="40" />
+      <rect className="footer-doodle-fill" x="54" y="56" width="152" height="154" rx="26" />
       <path {...strokeProps} d="M130 37V15m-13 0h26M48 79c0-16 13-29 29-29h106c16 0 29 13 29 29v112c0 16-13 29-29 29H77c-16 0-29-13-29-29V79Z" />
       <path {...strokeProps} d="M28 111H13v55h35m164-55h34v55h-34M78 101c0-15 10-26 24-26s24 11 24 26-10 27-24 27-24-12-24-27Zm56 0c0-15 10-26 24-26s24 11 24 26-10 27-24 27-24-12-24-27Z" />
       <path {...strokeProps} className="footer-robot-mouth" d="M84 166c28 18 62 18 91 0M91 185h78" />
       <path {...strokeProps} d="m71 224-10 25m128-25 10 25" />
+      <path {...fineStrokeProps} className="footer-doodle-fine" d="M68 143h124M130 62v67M58 91h-25m169 0h25" />
+      <circle className="footer-doodle-node" cx="102" cy="101" r="8" />
+      <circle className="footer-doodle-node" cx="158" cy="101" r="8" />
+      <circle className="footer-doodle-node" cx="130" cy="15" r="5" />
     </svg>
 
     <svg className="footer-doodle footer-spark" viewBox="0 0 170 170">
+      <path className="footer-doodle-fill" d="m86 17 17 46 43-18-21 42 37 22-46 7-4 48-28-39-40 27 16-45-46-15 46-16-11-46 37 31 30-34Z" />
       <path {...strokeProps} d="m86 8 12 51 45-25-27 45 49 10-50 11 25 44-43-26-12 49-10-49-45 26 27-45L8 88l49-10-25-44 44 25L86 8Z" />
+      <circle {...fineStrokeProps} className="footer-doodle-orbit" cx="85" cy="88" r="57" />
       <circle cx="85" cy="88" r="17" fill="currentColor" />
+      <circle cx="85" cy="88" r="7" fill="#09090a" />
     </svg>
 
     <svg className="footer-doodle footer-mini-face" viewBox="0 0 150 130">
+      <path className="footer-doodle-echo" d="M9 72C9 29 36 4 77 4c42 0 67 25 67 68 0 41-25 60-67 60-41 0-68-20-68-60Z" />
+      <path className="footer-doodle-fill" d="M23 68c0-33 21-50 53-50 33 0 52 18 52 50 0 30-20 44-52 44-31 0-53-15-53-44Z" />
       <path {...strokeProps} d="M17 68c0-37 24-57 59-57 36 0 58 21 58 57 0 35-22 51-58 51-35 0-59-17-59-51Z" />
       <circle cx="52" cy="62" r="7" fill="currentColor" />
       <circle cx="99" cy="62" r="7" fill="currentColor" />
       <path {...strokeProps} className="footer-mini-mouth" d="M51 87c15 9 34 9 49 0" />
       <path {...strokeProps} d="m32 18-13-15m99 16 13-15" />
+      <path {...fineStrokeProps} className="footer-doodle-fine" d="M40 44c7-8 16-11 25-9m23 0c10-2 18 1 24 9" />
     </svg>
   </div>;
 }

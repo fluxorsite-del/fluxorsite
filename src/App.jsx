@@ -19,6 +19,10 @@ import { FooterDoodles, SocialIcon } from "./FooterDoodles";
 import CircularGallery from "./CircularGallery";
 import ScrollSyncedText from "./ScrollSyncedText";
 import MenuDoodles from "./MenuDoodles";
+import { LottieAnimation, LottieToggleIcon } from "./LottieAnimation";
+import menuToggleLottie from "./assets/lottie/menu-toggle.json";
+import orbitLottie from "./assets/lottie/orbit.json";
+import footerArrowLottie from "./assets/lottie/footer-arrow.json";
 import serviceWebDesign from "./assets/services/web-design.webp";
 import serviceCreative from "./assets/services/desenvolvimento-criativo.webp";
 import serviceLanding from "./assets/services/landing-pages.webp";
@@ -133,7 +137,8 @@ function Nav() {
   return <nav ref={navRef} className={`nav ${menuOpen ? "menu-is-open" : ""}`} aria-label="Navegação principal">
     <a className="brand" data-mask-contrast href="#top" aria-label="Fluxor, início" onClick={closeMenu}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v5H9v4h10v5H9v4H3z"/></svg><span>FLUXOR<sup>®</sup></span></a>
     <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="fullscreen-menu" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} onClick={() => setMenuOpen(open => !open)}>
-      <span/><span/><span className="menu-toggle-label">MENU</span>
+      <LottieToggleIcon animationData={menuToggleLottie} active={menuOpen} className="menu-toggle-lottie" />
+      <span className="menu-toggle-label">{menuOpen ? "FECHAR" : "MENU"}</span>
     </button>
     <div className="menu-panel" id="fullscreen-menu" aria-hidden={!menuOpen} inert={!menuOpen}>
       <div className="menu-panel-meta"><span>NAVEGAÇÃO / 2026</span><span>ESTÚDIO DIGITAL INDEPENDENTE</span></div>
@@ -404,10 +409,16 @@ function DigitalEvolution() {
     <div className="digital-evolution-outro" data-scroll-reveal-section>
       <div className="digital-evolution-outro-sticky">
         <div className="digital-evolution-outro-label section-label"><span>04.1</span><span>PROXIMIDADE REAL</span></div>
+        <div className="digital-evolution-outro-art" aria-hidden="true">
+          <span className="digital-evolution-orbit-frame" />
+          <LottieAnimation animationData={orbitLottie} className="digital-evolution-orbit-lottie" />
+          <span className="digital-evolution-orbit-core"><b>04.1</b><small>FLX / CLOSE PROCESS</small></span>
+          <span className="digital-evolution-coordinate">12°58′S<br />38°30′W</span>
+        </div>
         <div className="digital-evolution-outro-copy">
-          <ScrollCharacterReveal progressStart={0} progressEnd={.64}>Trabalhamos com um número limitado de projetos por vez para mergulhar de verdade em cada marca, entender suas necessidades e cuidar de cada detalhe do processo.</ScrollCharacterReveal>
-          <ScrollCharacterReveal className="digital-evolution-outro-secondary" progressStart={.38} progressEnd={1}>Do conceito à entrega final, mantemos uma comunicação próxima e um acompanhamento constante para criar experiências digitais e visuais com intenção, consistência e personalidade.</ScrollCharacterReveal>
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="digital-evolution-cta">Vamos falar no WhatsApp <span aria-hidden="true">↗</span></a>
+          <div className="digital-evolution-statement digital-evolution-statement-primary"><span>01 / IMERSÃO</span><ScrollCharacterReveal progressStart={0} progressEnd={.64}>Trabalhamos com um número limitado de projetos por vez para mergulhar de verdade em cada marca, entender suas necessidades e cuidar de cada detalhe do processo.</ScrollCharacterReveal></div>
+          <div className="digital-evolution-statement digital-evolution-statement-secondary"><span>02 / CONTINUIDADE</span><ScrollCharacterReveal className="digital-evolution-outro-secondary" progressStart={.38} progressEnd={1}>Do conceito à entrega final, mantemos uma comunicação próxima e um acompanhamento constante para criar experiências digitais e visuais com intenção, consistência e personalidade.</ScrollCharacterReveal></div>
+          <div className="digital-evolution-outro-action"><small>CONVERSA DIRETA / PROCESSO PRÓXIMO</small><a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="digital-evolution-cta">Vamos falar no WhatsApp <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
     </div>
@@ -423,7 +434,7 @@ function Process() {
   return <section className="process pricing section-pad" id="process">
     <div className="section-label reveal"><span>06</span><span>FORMATOS DE PROJETO</span></div>
     <div className="pricing-head"><span>INVESTIMENTO COM CONTEXTO</span><h2>Escolha um ponto<br />de <em>partida.</em></h2><p>Cada projeto é dimensionado depois da imersão. Estes formatos ajudam a entender escopo e investimento inicial.</p></div>
-    <div className="pricing-grid">{pricingPlans.map(plan => <article key={plan.name} className={`pricing-card${plan.featured ? " is-featured" : ""}`}><span className="pricing-number">{plan.number}</span>{plan.featured && <span className="pricing-tag">MAIS ESCOLHIDO</span>}<h3>{plan.name}</h3><p>{plan.description}</p><strong>{plan.price}</strong><ul>{plan.features.map(feature => <li key={feature}>{feature}<span>↗</span></li>)}</ul><a href={whatsappLink(`Olá, quero conversar sobre o formato ${plan.name} da Fluxor.`)} target="_blank" rel="noreferrer">Conversar no WhatsApp <span>→</span></a></article>)}</div>
+    <div className="pricing-grid">{pricingPlans.map(plan => <article key={plan.name} className={`pricing-card${plan.featured ? " is-featured" : ""}`}><div className="pricing-card-top"><span className="pricing-number">{plan.number}</span><span className="pricing-code">FLX / {plan.number}</span></div>{plan.featured && <span className="pricing-tag">MAIS ESCOLHIDO</span>}<h3>{plan.name}</h3><p>{plan.description}</p><div className="pricing-price"><small>INVESTIMENTO</small><strong>{plan.price}</strong></div><ul>{plan.features.map(feature => <li key={feature}>{feature}<span>↗</span></li>)}</ul><a href={whatsappLink(`Olá, quero conversar sobre o formato ${plan.name} da Fluxor.`)} target="_blank" rel="noreferrer"><span>Conversar no WhatsApp</span><i aria-hidden="true">↗</i></a></article>)}</div>
     <p className="pricing-note">* Os valores são referências iniciais. Escopo, prazo e necessidades técnicas definem a proposta final.</p>
   </section>;
 }
@@ -443,7 +454,7 @@ function Contact() {
       <div className="contact-actions">
         <a className="contact-mail" href="mailto:hello@fluxor.studio"><span>hello@fluxor.studio</span><i aria-hidden="true">↗</i></a>
         <a className="contact-mail contact-phone" href="tel:+5571981987777"><span>+55 71 98198-7777</span><i aria-hidden="true">↗</i></a>
-        <a className="contact-mail contact-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noreferrer"><span>Falar no WhatsApp</span><i aria-hidden="true">↗</i></a>
+        <a className="contact-mail contact-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noreferrer"><span>Falar no WhatsApp</span><i className="contact-lottie-arrow" aria-hidden="true"><LottieAnimation animationData={footerArrowLottie} className="footer-arrow-lottie" /></i></a>
       </div>
     </div>
     <div className="contact-bottom">
