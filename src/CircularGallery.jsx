@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./CircularGallery.css";
+import useMediaQuery from "./useMediaQuery";
 
 const wrap = (value, length) => ((value % length) + length) % length;
 
@@ -9,26 +10,31 @@ export default function CircularGallery({ items = [], bend = 3, scrollSpeed = 1,
   const currentRef = useRef(0);
   const dragRef = useRef(null);
   const [position, setPosition] = useState(0);
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const frameRef = useRef(0);
+  const animateRef = useRef(null);
 
   useEffect(() => {
-    let frame;
     const tick = () => {
-      currentRef.current += (targetRef.current - currentRef.current) * scrollEase;
+      frameRef.current = 0;
+      const remaining = targetRef.current - currentRef.current;
+      currentRef.current = reduced || Math.abs(remaining) < .001 ? targetRef.current : currentRef.current + remaining * scrollEase;
       setPosition(currentRef.current);
-      frame = requestAnimationFrame(tick);
+      if (currentRef.current !== targetRef.current) frameRef.current = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [scrollEase]);
+    animateRef.current = () => { if (!frameRef.current) frameRef.current = requestAnimationFrame(tick); };
+    animateRef.current();
+    return () => cancelAnimationFrame(frameRef.current);
+  }, [scrollEase, reduced]);
 
-  const moveTo = next => { targetRef.current = next; };
+  const moveTo = next => { targetRef.current = next; animateRef.current?.(); };
   const onWheel = event => {
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) {
-      event.preventDefault();
       moveTo(targetRef.current + (event.deltaX || event.deltaY) * .006 * scrollSpeed);
     }
   };
   const onPointerDown = event => {
+    if (event.target.closest('button,a') || event.button !== 0) return;
     dragRef.current = { x: event.clientX, start: targetRef.current };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -43,6 +49,7 @@ export default function CircularGallery({ items = [], bend = 3, scrollSpeed = 1,
     event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
   const onKeyDown = event => {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') event.preventDefault();
     if (event.key === "ArrowRight") moveTo(Math.round(targetRef.current) + 1);
     if (event.key === "ArrowLeft") moveTo(Math.round(targetRef.current) - 1);
   };
@@ -58,7 +65,7 @@ export default function CircularGallery({ items = [], bend = 3, scrollSpeed = 1,
         const scale = Math.max(.7, 1 - distance * .11);
         const opacity = Math.max(.18, 1 - distance * .24);
         return <article key={item.name} className="testimonial-card" style={{ "--card-x": `${x}vw`, "--card-y": `${y}px`, "--card-rotate": `${rotate}deg`, "--card-scale": scale, "--card-opacity": opacity, zIndex: 20 - Math.round(distance * 2) }} aria-hidden={distance > 2.2}>
-          <div className="testimonial-card-top"><img src={item.image} alt={`Retrato de ${item.name}`} loading="lazy" /><div><strong>{item.name}</strong><span>{item.role}</span></div><span className="testimonial-quote">“</span></div>
+          <div className="testimonial-card-top"><span className="testimonial-avatar" aria-hidden="true">{item.name.split(' ').map(part => part[0]).slice(0,2).join('')}</span><div><strong>{item.name}</strong><span>{item.role}</span></div><span className="testimonial-quote">“</span></div>
           <div className="testimonial-stars" aria-label="5 de 5 estrelas">★★★★★</div>
           <p>{item.quote}</p>
           <small>PROJETO / {String(index + 1).padStart(2, "0")}</small>

@@ -1,0 +1,26 @@
+.project-dialog { width: min(1040px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto; overscroll-behavior: contain; border: 1px solid #ffffff30; border-radius: 18px; background: #0e0a12; color: #f2f0eb; }
+.project-dialog::backdrop { background: #000b; backdrop-filter: blur(7px); }
+.project-dialog-bar { position: sticky; z-index: 2; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 24px; background: #0e0a12f5; border-bottom: 1px solid #ffffff30; font-size: 10px; letter-spacing: .05em; }
+.project-dialog button { min-height: 44px; padding: 10px 16px; border: 1px solid #ffffff70; border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
+.project-dialog-head { padding: clamp(24px, 5vw, 60px); }
+.project-dialog-head > span, .project-dialog-story section > span { color: #d8ff35; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+.project-dialog h2 { margin: 20px 0; font-size: clamp(4rem, 9vw, 7rem); line-height: .85; letter-spacing: -.07em; }
+.project-dialog p { max-width: 650px; line-height: 1.6; }
+.project-dialog figure { margin: 0; }
+.project-dialog figure img { display: block; width: 100%; max-height: 720px; object-fit: contain; background: #08050c; }
+.project-dialog figcaption { padding: 12px 24px; font-size: 10px; color: #f2f0ebbb; }
+.project-dialog-story { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px; padding: 40px; }
+.project-dialog h3 { font-size: 27px; letter-spacing: -.04em; }
+.project-dialog-story p { font-size: 15px; color: #f2f0ebd0; }
+.project-dialog footer { padding: 26px 40px 40px; border-top: 1px solid #ffffff30; }
+.project-dialog footer a { display: inline-flex; justify-content: space-between; gap: 28px; padding: 16px 22px; border-radius: 999px; background: #d8ff35; color: #11110f; font-size: 14px; font-weight: 700; }
+body:has(.project-dialog[open]) .whatsapp-float { visibility: hidden; }
+@media (max-width: 700px) {
+  .project-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); border-radius: 12px; }
+  .project-dialog-bar { padding: 10px 16px; }
+  .project-dialog-bar > span { max-width: 150px; line-height: 1.5; }
+  .project-dialog-story { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
+  .project-dialog-story section { border-top: 1px solid #ffffff30; padding-top: 20px; }
+  .project-dialog footer { padding: 24px; }
+  .project-dialog footer a { width: 100%; }
+}

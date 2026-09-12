@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import useMediaQuery from './useMediaQuery';
 
 const chapters = [
   { index: "01", title: "Escutamos antes de criar.", copy: "Toda boa experiência começa entendendo o contexto, as pessoas e o que a marca realmente precisa comunicar." },
@@ -8,7 +9,9 @@ const chapters = [
 
 export default function ScrollSyncedText() {
   const sectionRef = useRef(null);
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
   useEffect(() => {
+    if (reduced) return;
     const section = sectionRef.current;
     let frame = 0;
     const update = () => {
@@ -23,7 +26,7 @@ export default function ScrollSyncedText() {
     addEventListener("scroll", request, { passive: true });
     addEventListener("resize", request);
     return () => { cancelAnimationFrame(frame); removeEventListener("scroll", request); removeEventListener("resize", request); };
-  }, []);
+  }, [reduced]);
   return <section ref={sectionRef} className="scroll-synced" aria-label="Nosso jeito de trabalhar">
     <div className="scroll-synced-sticky">
       <div className="section-label"><span>08</span><span>NOSSO JEITO</span></div>

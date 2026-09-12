@@ -22,7 +22,7 @@ export default function ServiceHoverLink({ index, title, description, image }) {
   };
 
   const onPointerMove = event => {
-    if (event.pointerType === "touch") return;
+    if (event.pointerType === "touch" || matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) return;
     const rect = linkRef.current.getBoundingClientRect();
     const state = stateRef.current;
     state.tx = (event.clientX - rect.left - rect.width * .67) * .18;
@@ -31,6 +31,7 @@ export default function ServiceHoverLink({ index, title, description, image }) {
   };
 
   const onPointerEnter = () => {
+    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) return;
     stateRef.current.active = true;
     if (!stateRef.current.raf) stateRef.current.raf = requestAnimationFrame(animate);
   };
@@ -46,7 +47,7 @@ export default function ServiceHoverLink({ index, title, description, image }) {
   return <a ref={linkRef} className="service-link" href="#contact" onPointerMove={onPointerMove} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
     <span className="service-no">{String(index + 1).padStart(2, "0")}</span>
     <span className="service-link-copy">
-      <span className="service-heading" aria-label={title}>{[...title].map((character, characterIndex) => <span className="service-heading-char" aria-hidden="true" key={`${character}-${characterIndex}`} style={{ "--char-index": characterIndex }}>{character === " " ? "\u00a0" : character}</span>)}</span>
+      <span className="service-heading" aria-label={title}>{title.split(' ').map((word, wordIndex) => <React.Fragment key={wordIndex}>{wordIndex>0?' ':null}<span className="service-heading-word" aria-hidden="true">{[...word].map((character, characterIndex) => <span className="service-heading-char" key={characterIndex} style={{ '--char-index': title.split(' ').slice(0,wordIndex).join(' ').length + characterIndex }}>{character}</span>)}</span></React.Fragment>)}</span>
       <span className="service-description">{description}</span>
     </span>
     <img ref={imageRef} className="service-hover-image" src={image} alt="" loading="lazy" decoding="async" aria-hidden="true" />

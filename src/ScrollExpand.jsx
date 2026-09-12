@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import "./ScrollExpand.css";
+import useMediaQuery from './useMediaQuery';
 
 const clamp = (value, min, max) => value < min ? min : value > max ? max : value;
 const smoothstep = (edge0, edge1, value) => {
@@ -31,6 +32,7 @@ export default function ScrollExpand({
   style,
 }) {
   const rootRef = useRef(null);
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const trackRef = useRef(null);
   const stageRef = useRef(null);
   const frameRef = useRef(null);
@@ -154,16 +156,20 @@ export default function ScrollExpand({
     if (mediaType !== "video" || !media) return undefined;
     media.muted = true;
     media.volume = 0;
+    if (reducedMotion) { media.pause(); return; }
+    let visible = false;
+    const resume = () => { if(visible&&!document.hidden) media.play().catch(()=>{}); else media.pause(); };
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) media.play().catch(() => {});
-      else media.pause();
+      visible = entry.isIntersecting;
+      resume();
     }, { threshold: .04, rootMargin: "100px 0px" });
     observer.observe(media);
-    return () => observer.disconnect();
-  }, [mediaType, src]);
+    document.addEventListener('visibilitychange',resume);
+    return () => { observer.disconnect(); media.pause(); document.removeEventListener('visibilitychange',resume); };
+  }, [mediaType, src, reducedMotion]);
 
   const media = mediaType === "video"
-    ? <video ref={mediaRef} className="scroll-expand__media" src={src} poster={poster} autoPlay muted loop playsInline preload="metadata" disablePictureInPicture onLoadedMetadata={event => { event.currentTarget.muted = true; event.currentTarget.volume = 0; }} />
+    ? <video ref={mediaRef} className="scroll-expand__media" src={src} poster={poster} muted loop playsInline preload="metadata" disablePictureInPicture onLoadedMetadata={event => { event.currentTarget.muted = true; event.currentTarget.volume = 0; }} />
     : <img ref={mediaRef} className="scroll-expand__media" src={src} alt={alt} draggable={false} />;
 
   return <div ref={rootRef} className={`scroll-expand ${useWindowScroll ? "" : "scroll-expand--scroller"} ${className}`.trim()} style={style}>

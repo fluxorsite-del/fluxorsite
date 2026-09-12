@@ -1,0 +1,243 @@
+@media (max-width: 900px) {
+  .nav { height: 72px; padding: 0 18px; grid-template-columns: 1fr auto; }.nav-links { display: none; }
+  .menu-panel { padding: 100px 18px 20px; }.menu-panel-meta { top: 80px; right: 18px; left: 18px; }.menu-links { width: 72vw; }.menu-art { left: 67%; }.menu-links a { grid-template-columns: 8vw 1fr auto; }.menu-links a > span { font-size: 7vw; }
+  .project-link { padding: 11px 14px; gap: 10px; }
+  .section-pad { padding: 90px 18px; }
+  .company-intro { height: 560svh; margin-top: -12svh; }
+  .company-journey-sticky { min-height: 740px; }
+  .company-intro-sticky { min-height: 740px; padding: 26px 18px 22px; border-radius: 30px 30px 0 0; }
+  .intro-progress { top: 30px; right: 18px; width: 32vw; }
+  .intro-project { width: calc(100% - 36px); height: 58vh; aspect-ratio: auto; }
+  .intro-grid { right: -10vw; top: 17%; width: 76vw; height: 62%; }
+  .intro-copy { width: calc(100% - 54px); }
+  .intro-copy-top { top: 13%; left: 18px; font-size: clamp(1.9rem, 6vw, 3.8rem); line-height: .98; white-space: normal; }
+  .intro-copy-bottom { right: 18px; bottom: 10%; max-width: calc(100% - 54px); font-size: clamp(1.45rem, 4.7vw, 2.9rem); line-height: 1.04; }
+  .intro-tag-one { left: 18px; top: 36%; }
+  .intro-tag-two { right: 18px; bottom: 28%; }
+  .intro-tags em { left: 24px; bottom: 21%; }
+  .horizontal-work { min-height: 740px; padding: 26px 18px 22px; border-radius: 30px 0 0 30px; }
+  .horizontal-work-count { top: 26px; right: 18px; }
+  .horizontal-work-copy { left: 18px; top: 11%; width: calc(100% - 36px); }
+  .horizontal-work-copy > span { max-width: 720px; font-size: clamp(2.2rem, 5.3vw, 4.5rem); }
+  .horizontal-work-copy > em { width: 68%; margin: 15px 0 0 auto; font-size: clamp(1.05rem, 2.7vw, 1.7rem); }
+  .horizontal-slider-shell { right: 18px; top: 39%; width: calc(100% - 36px); height: 49%; }
+  .horizontal-drag-hint { left: 18px; bottom: 20px; }
+  .horizontal-use { min-height: 740px; padding: 26px 18px 22px; border-radius: 0; }
+  .horizontal-use-meta { top: 26px; right: 18px; }
+  .horizontal-use-copy { left: 18px; top: 10%; width: min(62vw, 610px); }
+  .horizontal-use-copy > span { font-size: clamp(2.2rem, 5.8vw, 4.8rem); }
+  .horizontal-use-copy > em { width: 78%; margin-top: 16px; font-size: clamp(1rem, 2.6vw, 1.55rem); }
+  .use-collage { inset: 33% 18px 8% 37%; }
+  .use-frame-one { width: 34%; height: 56%; }
+  .use-frame-two { left: 30%; width: 37%; height: 65%; }
+  .use-frame-three { width: 64%; height: 34%; }
+  .horizontal-use-mark { left: 18px; bottom: 22px; }
+  .intro-mark { left: 18px; bottom: 22px; }
+  .project { width: calc(100% - 36px); margin-bottom: 28vw; transform: none !important; }.project-visual { height: 62vh; min-height: 460px; }.project-info { grid-template-columns: 1fr auto; }.project-info h2 { grid-column: 1 / -1; grid-row: 1; margin-bottom: 12px; }.project-info span:first-child { grid-row: 2; }.project-info span:last-child { grid-row: 2; }
+  .orb-a { width: 56vw; height: 56vw; }.orb-b { width: 28vw; height: 28vw; }.chrome-disc { width: 67vw; }
+  .services { padding-bottom: 110px; }.service-list { margin-top: 65px; }.service-link { min-height: 100px; grid-template-columns: 10% 1fr auto; }.service-link-copy { gap: 18px; }.service-heading { font-size: clamp(2rem, 5.8vw, 4.5rem); }.service-description { max-width: 210px; }.service-hover-image { width: clamp(180px, 25vw, 260px); }
+  .pricing-head { grid-template-columns: 14% 1fr 30%; }.pricing-head h2 { font-size: 9vw; }.pricing-grid { grid-template-columns: repeat(2, 1fr); }.pricing-card:last-child { grid-column: 1/-1; min-height: 500px; }.testimonials-head { grid-template-columns: 13% 1fr 30%; }.scroll-synced-chapter { grid-template-columns: 9% 1fr 32%; }
+  .contact h2 { font-size: clamp(5rem, 13vw, 10rem); }
+  .digital-evolution-head { top: 26px; left: 18px; right: 18px; }
+  .digital-evolution .scroll-expand__stage { min-height: 700px; }
+  .digital-expanded-copy { max-width: 96vw; font-size: clamp(3rem, 9vw, 7rem); }
+  .digital-evolution-outro { height: 220svh; }
+  .digital-evolution-outro-sticky { grid-template-columns: 1fr; gap: 58px; padding-right: 18px; padding-left: 18px; }
+  .digital-evolution-outro-copy p + p { width: 88%; }
+  .services-contact { margin-top: 54px; } }
+@media (max-width: 540px) {
+  .menu-panel { overflow-y: auto; }.menu-panel-meta span:last-child { display: none; }.menu-links { width: 100%; }.menu-links a { grid-template-columns: 20% 1fr auto; }.menu-links small { font-size: 7px; }.menu-art { inset: 90px 0 auto 0; height: 155px; opacity: .68; }.menu-dino { top: 0; left: 15%; width: 120px; }.menu-eye { top: 18px; right: 4%; left: auto; width: 100px; }.menu-orbit { display: none; }.menu-bot { display: none; }.menu-art-caption { display: none; }.menu-footer > span { display: none; }.menu-footer { justify-content: flex-end; }
+  .project-link span { display: none; }.project-link { width: 40px; height: 40px; justify-content: center; padding: 0; }
+  .company-journey-sticky { min-height: 700px; }
+  .company-intro-sticky { min-height: 700px; }
+  .intro-label { grid-template-columns: 42px auto; }
+  .intro-progress { width: 26vw; }
+  .intro-project { top: 51%; clip-path: polygon(1% 2%, 31% .5%, 54% 2%, 78% .7%, 99% 2.5%, 100% 94%, 77% 91%, 54% 94%, 29% 91%, 0 94%); }
+  .intro-project-index, .intro-project-type { font-size: 7px; }
+  .intro-copy-top { top: 14%; font-size: 7.8vw; }
+  .intro-copy-bottom { bottom: 12%; font-size: 5.9vw; }
+  .intro-copy mark { margin-top: 8px; padding: 5px 7px 4px; font-size: 7px; }
+  .intro-tag { padding: 5px 7px 4px; font-size: 7px; }
+  .intro-tag-one { top: 39%; }
+  .intro-tag-two { bottom: 30%; }
+  .intro-tags em { display: none; }
+  .horizontal-work { min-height: 700px; }
+  .horizontal-work-copy { top: 12%; }
+  .horizontal-work-copy > span { font-size: 8.2vw; line-height: .94; }
+  .horizontal-work-copy > em { width: 82%; margin-top: 12px; font-size: 4.3vw; }
+  .horizontal-slider-shell { top: 43%; }
+  .horizontal-drag-hint { font-size: 7px; }
+  .horizontal-use { min-height: 700px; }
+  .horizontal-use-meta { display: none; }
+  .horizontal-use-copy { top: 11%; width: calc(100% - 36px); }
+  .horizontal-use-copy > span { width: 92%; font-size: 8.3vw; line-height: .91; }
+  .horizontal-use-copy > em { width: 78%; margin-top: 12px; font-size: 4.1vw; }
+  .use-collage { inset: 42% 18px 8% 18px; }
+  .use-frame-one { left: 0; top: 10%; width: 31%; height: 55%; }
+  .use-frame-two { left: 29%; width: 37%; height: 65%; }
+  .use-frame-three { width: 56%; height: 33%; }
+  .work-head { min-height: 30vh; }.project-visual { height: 54vh; min-height: 400px; }
+  .kinetic-type { font-size: 24vw; }.catalog-grid { font-size: 10vw; }.project-three .project-visual p { font-size: 22vw; }
+  .service-link { min-height: 106px; grid-template-columns: 13% 1fr auto; }.service-link-copy { display: block; padding: 20px 0; }.service-heading { font-size: 8vw; line-height: .94; }.service-description { display: block; max-width: 80%; margin-top: 8px; font-size: 9px; }.service-arrow { width: 40px; height: 40px; margin-right: 0; font-size: 18px; transform: none; }
+  .pricing-head { display: block; min-height: auto; padding: 90px 0 55px; }.pricing-head > span { display: block; margin-bottom: 22px; }.pricing-head h2 { font-size: 17vw; }.pricing-head > p { margin-top: 30px; }.pricing-grid { grid-template-columns: 1fr; }.pricing-card, .pricing-card:last-child { grid-column: auto; min-height: 520px; }.pricing-card:hover { transform: none; }.pricing-note { text-align: left; }
+  .testimonials-head { display: block; }.testimonials-head .section-label { margin-bottom: 70px; }.testimonials-head h2 { font-size: 16vw; }.testimonials-head > p { margin-top: 28px; }.scroll-synced-side { display: none; }.scroll-synced-chapter { display: flex; flex-direction: column; align-items: flex-start; }.scroll-synced-chapter > span { padding: 0 0 28px; }.scroll-synced-chapter p { align-self: auto; margin: 38px 0 0; }
+  .contact-topline, .contact-bottom { grid-template-columns: 1fr auto; }
+  .contact-topline > span, .contact-bottom > :last-child { display: none; }
+  .contact-actions { width: 100%; flex-direction: column; align-items: center; }
+  .contact-mail { justify-content: space-between; font-size: 14px; }
+  .contact-bottom > span { font-size: 7px; }
+  .footer-robot { right: -16%; bottom: 8%; width: 180px; opacity: .72; }
+  .footer-spark { top: 20%; right: 4%; width: 72px; }
+  .footer-mini-face { left: 1%; bottom: 9%; width: 90px; opacity: .72; }
+  .digital-expanded-copy { font-size: 12vw; line-height: .9; }
+  .digital-evolution-outro-copy p { line-height: 1; }
+  .digital-evolution-outro-copy p + p { line-height: 1.04; }
+  .menu-links { margin-top: 138px; }
+  .menu-links a { min-height: 72px; }
+  .menu-links a > span { font-size: 12vw; }
+  .menu-footer { align-items: flex-end; gap: 12px; }
+  .menu-footer-whatsapp { padding: 11px 13px; }
+  .services-contact { align-items: flex-start; flex-direction: column; }
+  .services-contact a { width: 100%; justify-content: space-between; }
+  .service-description, .pricing-card > p, .testimonials-head > p { font-size: 13px; }
+  .section-label { font-size: 11px; }
+  .contact-actions { gap: 8px; }
+  .whatsapp-float { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); font-size: 11px; box-shadow: 0 10px 28px rgba(9,9,10,.28); }
+
+  .company-intro { height: 480svh; }
+  .company-journey-sticky,
+  .company-intro-sticky,
+  .horizontal-work,
+  .horizontal-use { height: 100svh; min-height: 0; }
+  .intro-project { height: 52svh; }
+  .horizontal-slider-shell { height: 42%; }
+
+  .digital-evolution-outro { height: 195svh; }
+  .digital-evolution-outro-sticky { min-height: 0; height: 100svh; gap: 34px; padding-top: 82px; padding-bottom: 72px; }
+  .digital-evolution-outro-copy p { font-size: clamp(1.75rem, 7.2vw, 2.4rem); }
+  .digital-evolution-outro-copy p + p { width: 100%; margin-top: 34px; font-size: clamp(1.35rem, 5.5vw, 1.85rem); }
+  .digital-evolution-cta { margin-top: 38px; padding: 14px 17px; }
+
+  .scroll-synced { height: 255svh; }
+  .scroll-synced-sticky { height: 100svh; padding: 22px 18px; }
+  .scroll-synced-chapters { inset: 15% 30px 12% 20px; }
+  .scroll-synced-chapter { justify-content: center; width: 100%; min-width: 0; }
+  .scroll-synced-chapter > span { padding-bottom: 22px; }
+  .scroll-synced-chapter h2 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(3.15rem, 14vw, 4.8rem);
+    line-height: .79;
+    letter-spacing: -.075em;
+    overflow-wrap: break-word;
+  }
+  .scroll-synced-chapter p { max-width: 100%; margin-top: 30px; padding-right: 16px; font-size: 12px; }
+  .scroll-synced-track { right: 12px; top: 13%; height: 70%; }
+  .scroll-synced-hint { right: 12px; bottom: 16px; }
+
+  .contact { min-height: 100svh; padding: 16px 18px 14px; }
+  .contact-center { justify-content: center; }
+  .contact-kicker { margin-bottom: 15px; }
+  .contact h2 { max-width: 100%; font-size: clamp(3.8rem, 17vw, 5.8rem); line-height: .77; }
+  .contact-actions { margin-top: 29px; }
+  .contact-phone, .contact-whatsapp { display: none; }
+  .contact-mail { width: min(100%, 320px); min-width: 0; padding-left: 20px; }
+  .footer-doodle { animation: none !important; }
+  .footer-robot, .footer-spark, .footer-mini-face { display: none; }
+  .footer-dino { top: 8%; left: 49%; width: 145px; opacity: .24; }
+  .footer-smiley { top: auto; bottom: 8%; left: -9%; width: 105px; opacity: .28; }
+  .contact-bottom { padding-top: 12px; }
+  .whatsapp-float { width: 46px; height: 46px; justify-content: center; padding: 0; border-color: rgba(9,9,10,.3); }
+  .whatsapp-float span { display: none; }
+  .whatsapp-float i { width: 34px; height: 34px; }
+  .scroll-synced-hint { display: none; } }
+@media (max-width: 540px) and (max-height: 740px) {
+  .digital-evolution-outro-sticky { padding-top: 72px; padding-bottom: 55px; }
+  .contact h2 { font-size: clamp(3.45rem, 15.5vw, 5rem); }
+  .contact-actions { margin-top: 23px; } }
+@media (min-width: 1600px) and (min-aspect-ratio: 2 / 1) {
+
+  .menu-panel { padding-left: var(--ultra-gutter); padding-right: var(--ultra-gutter); }
+  .menu-panel-meta { left: var(--ultra-gutter); right: var(--ultra-gutter); }
+  .menu-links { width: min(54vw, 1020px); }
+  .menu-art { left: calc(50% + var(--ultra-safe-width) * .12); right: var(--ultra-gutter); }
+
+  .company-intro-sticky::after { left: var(--ultra-gutter); right: var(--ultra-gutter); }
+  .intro-progress { right: var(--ultra-gutter); }
+  .intro-copy-top { left: calc(var(--ultra-gutter) + 3vh); }
+  .intro-copy-bottom { right: calc(var(--ultra-gutter) + 3vh); }
+  .intro-tag-one { left: calc(var(--ultra-gutter) + 5vh); }
+  .intro-tag-two { right: calc(var(--ultra-gutter) + 5vh); }
+  .intro-tags em { left: calc(var(--ultra-gutter) + 6vh); }
+  .intro-mark { left: var(--ultra-gutter); }
+
+  .horizontal-work-count, .horizontal-use-meta { right: var(--ultra-gutter); }
+  .horizontal-work-copy, .horizontal-use-copy { left: calc(var(--ultra-gutter) + 2vh); }
+  .horizontal-slider-shell { right: calc(var(--ultra-gutter) + 1vh); }
+  .horizontal-drag-hint { left: calc(var(--ultra-gutter) + 2vh); }
+  .use-collage { right: var(--ultra-gutter); }
+  .horizontal-use-mark { left: var(--ultra-gutter); }
+  .horizontal-use::before { right: var(--ultra-gutter); }
+
+  .digital-evolution-head { left: var(--ultra-gutter); right: var(--ultra-gutter); }
+  .digital-evolution-outro-sticky {
+    grid-template-columns: minmax(160px, .8fr) minmax(0, 2.15fr);
+    padding: clamp(80px, 10vh, 125px) var(--ultra-gutter) 10svh;
+  }
+  .digital-evolution-outro-copy { max-width: 900px; }
+  .digital-evolution-outro-copy p { font-size: clamp(2rem, 4.8vh, 4rem); }
+  .digital-evolution-outro-copy p + p { font-size: clamp(1.4rem, 3.4vh, 2.75rem); }
+
+  .service-list { margin-top: 8vh; }
+  .service-link { min-height: clamp(96px, 11vh, 120px); }
+  .service-heading { font-size: clamp(2.2rem, 8vh, 5.2rem); }
+
+  .pricing-head { min-height: 44vh; padding-top: 4vh; padding-bottom: 4vh; }
+  .pricing-head h2 { font-size: clamp(4.7rem, 14vh, 8.5rem); }
+  .pricing-card { min-height: 500px; }
+  .pricing-card h3 { font-size: clamp(2.4rem, 6.5vh, 4.4rem); }
+
+  .testimonials-head h2 { font-size: clamp(4.5rem, 12vh, 8rem); }
+  .testimonial-card { width: min(24vw, 430px); }
+
+  .scroll-synced-side { left: var(--ultra-gutter); }
+  .scroll-synced-track, .scroll-synced-hint { right: var(--ultra-gutter); }
+  .scroll-synced-chapters { left: calc(var(--ultra-gutter) + 6vh); right: calc(var(--ultra-gutter) + 6vh); }
+  .scroll-synced-chapter { grid-template-columns: 10% 1fr 26%; }
+  .scroll-synced-chapter h2 { font-size: clamp(5rem, 15vh, 9.5rem); }
+
+  .contact h2 { max-width: min(100%,1400px); font-size: clamp(5rem, 19vh, 18rem); }
+  .footer-dino { left: calc(var(--ultra-gutter) + 12%); }
+  .footer-smiley { left: calc(var(--ultra-gutter) - 6%); }
+  .footer-robot { right: calc(var(--ultra-gutter) - 3%); }
+  .footer-spark { right: calc(var(--ultra-gutter) + 12%); }
+  .footer-mini-face { left: calc(var(--ultra-gutter) + 8%); }
+  :root { --ultra-safe-width: 100vw; --ultra-gutter: clamp(32px, 3vw, 128px); }
+  .nav,
+  .section-pad,
+  .company-intro-sticky,
+  .horizontal-work,
+  .horizontal-use,
+  .scroll-synced-sticky,
+  .contact { padding-left: var(--ultra-gutter); padding-right: var(--ultra-gutter); }
+  .service-list, .pricing-grid, .pricing-note, .testimonials-head, .contact-center { width: min(100%, 3000px); margin-left: auto; margin-right: auto; }
+  .horizontal-slider-shell { width: min(36vw, 920px); }
+  .use-collage { left: 52%; } }
+@media (pointer: coarse) {
+  .service-hover-image { display: none; }
+  .service-link:hover .service-heading, .service-link:hover .service-heading-char, .service-link:hover .service-description { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .footer-doodle, .footer-doodle *, .menu-doodle, .menu-doodle * { animation: none !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .company-intro { height: auto; }
+  .company-journey-sticky { position: relative; height: auto; }
+  .company-track { display: block; width: 100%; height: auto; transform: none; }
+  .company-intro-sticky, .horizontal-work, .horizontal-use { height: 100svh; min-height: 700px; }
+  .intro-project { transform: translate(-50%, -50%); filter: none; opacity: 1; }
+  .intro-copy-top, .intro-copy-bottom { transform: none; opacity: 1; }
+  .aurora { animation: none; }
+  .horizontal-use-head, .horizontal-use-meta, .horizontal-use-copy, .use-collage { opacity: 1; }
+  .horizontal-use-copy, .use-frame-one, .use-frame-two, .use-frame-three { transform: none; }
+  .digital-expanded-copy { opacity: 1; transform: none; }
+  .whatsapp-float { transform: none !important; } }

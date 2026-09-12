@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Mesh, Program, Renderer, Texture, Triangle } from "ogl";
 import { gsap } from "gsap";
 import "./MorphSlider.css";
+import useMediaQuery from './useMediaQuery';
 
 const vertex = `
 attribute vec2 position;
@@ -57,12 +58,22 @@ export default function MorphSlider({ items, autoplay = true, autoplayDelay = 3,
   const engineRef = useRef(null);
   const [index, setIndex] = useState(0);
   const [hovering, setHovering] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [fallbackMode, setFallbackMode] = useState(false);
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage || !items?.length) return undefined;
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const renderer = new Renderer({ alpha: false, antialias: true, dpr: Math.min(devicePixelRatio || 1, 1.5) });
+    if (reducedMotion || fallbackMode) {
+      engineRef.current = {next:()=>setIndex(i=>(i+1)%items.length),prev:()=>setIndex(i=>(i+items.length-1)%items.length)};
+      return ()=>{engineRef.current=null;};
+    }
+    const reduced = false;
+    let renderer;
+    try { renderer = new Renderer({ alpha: false, antialias: true, dpr: Math.min(devicePixelRatio || 1, 1.5) }); }
+    catch { setFallbackMode(true); return; }
     const gl = renderer.gl;
     const canvas = gl.canvas;
     canvas.className = "morph-slider-canvas";
@@ -136,6 +147,7 @@ export default function MorphSlider({ items, autoplay = true, autoplayDelay = 3,
     resize();
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
+      setVisible(visible);
       if (visible) start();
       else if (raf) { cancelAnimationFrame(raf); raf = 0; }
     }, { rootMargin: "180px 0px" });
@@ -156,20 +168,21 @@ export default function MorphSlider({ items, autoplay = true, autoplayDelay = 3,
       canvas.remove();
       engineRef.current = null;
     };
-  }, [items]);
+  }, [items, reducedMotion, fallbackMode]);
 
   useEffect(() => {
-    if (!autoplay || hovering) return undefined;
+    if (!autoplay || hovering || paused || !visible || reducedMotion || fallbackMode) return undefined;
     const timer = setTimeout(() => engineRef.current?.next(), autoplayDelay * 1000);
     return () => clearTimeout(timer);
-  }, [autoplay, autoplayDelay, hovering, index]);
+  }, [autoplay, autoplayDelay, hovering, index, paused, visible, reducedMotion, fallbackMode]);
 
   const previous = useCallback(() => engineRef.current?.prev(), []);
   const next = useCallback(() => engineRef.current?.next(), []);
 
-  return <div className={`morph-slider ${className}`} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-    <div ref={stageRef} className="morph-slider-stage" role="group" aria-roledescription="carousel" aria-label="Projetos selecionados" tabIndex={0} onKeyDown={event => { if (event.key === "ArrowLeft") previous(); if (event.key === "ArrowRight") next(); }} />
-    <div className="morph-slider-caption" aria-live="polite">{items.map((item, itemIndex) => <span key={item.caption} className={itemIndex === index ? "is-active" : ""}>{item.caption}</span>)}</div>
+  return <div className={`morph-slider ${className}`} onFocus={event=>{if(!event.target.closest('.morph-slider-pause'))setPaused(true);}} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+    <div ref={stageRef} className="morph-slider-stage" role="group" aria-roledescription="carousel" aria-label="Projetos selecionados" tabIndex={0} onKeyDown={event => { if (event.key === 'ArrowLeft'||event.key === 'ArrowRight') event.preventDefault(); if (event.key === "ArrowLeft") previous(); if (event.key === "ArrowRight") next(); }}>{(reducedMotion||fallbackMode)&&<img src={items[index].image} alt={items[index].caption} />}</div>
+    <div className="morph-slider-caption" aria-live={paused||hovering?'polite':'off'}>{items.map((item, itemIndex) => <span key={item.caption} aria-hidden={itemIndex!==index} className={itemIndex === index ? "is-active" : ""}>{item.caption}</span>)}</div>
+    {autoplay&&!reducedMotion&&!fallbackMode&&<button type="button" className="morph-slider-pause" onClick={()=>setPaused(value=>!value)} aria-label={paused?'Retomar troca automática de projetos':'Pausar troca automática de projetos'}>{paused?'▶':'Ⅱ'}</button>}
     <div className="morph-slider-controls"><button type="button" onClick={previous} aria-label="Projeto anterior">←</button><span>{String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}</span><button type="button" onClick={next} aria-label="Próximo projeto">→</button></div>
   </div>;
 }

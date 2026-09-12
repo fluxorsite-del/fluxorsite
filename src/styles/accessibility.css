@@ -1,0 +1,20 @@
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+.menu-toggle { min-height: 44px; }
+.service-heading-word { display: inline-block; white-space: nowrap; }
+.service-description { color: #c5bfcc; }
+.service-link:focus-visible .service-heading { color: var(--paper); }
+@media (max-width: 900px) { .service-heading { color: var(--paper); line-height: 1; } }
+.morph-slider-stage > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.morph-slider-pause { position: absolute; z-index: 5; top: 12px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff80; border-radius: 50%; background: #111c; color: #fff; cursor: pointer; }
+.morph-slider-controls button { min-width: 44px; min-height: 44px; }
+.testimonial-card-top .testimonial-avatar { display: grid; }
+.menu-links a:focus-visible { color: var(--ink); }
+.menu-links a:focus-visible::before { transform: scaleX(1); }
+.contact-socials a, .circular-gallery-controls button { min-width: 44px; min-height: 44px; }
+.testimonial-avatar { display: grid; place-items: center; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; background: var(--acid); color: var(--ink); font-size: 18px; font-weight: 800; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal, .reveal-late { opacity: 1 !important; transform: none !important; }
+}

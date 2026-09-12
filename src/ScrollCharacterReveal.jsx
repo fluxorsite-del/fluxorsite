@@ -13,6 +13,10 @@ export default function ScrollCharacterReveal({ children, className = "", progre
     if (!root) return undefined;
     const scrollSection = root.closest("[data-scroll-reveal-section]");
     const spans = [...root.querySelectorAll(".scroll-character-reveal__char")];
+    if (matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) {
+      spans.forEach(span => span.style.setProperty('--char-reveal', '1'));
+      return;
+    }
     let raf = 0;
 
     const render = () => {
